@@ -1,0 +1,11 @@
+name: Deploy to staging
+on:
+  push:
+    banches:
+      - main
+
+jobs:
+  deploy_everything:
+    name: Deplying everything to staging
+    steps:
+      - name: SSH into server
