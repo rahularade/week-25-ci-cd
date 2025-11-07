@@ -14,9 +14,10 @@ jobs:
           chmod 600 ~/ssh_key
           mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOST }}" > ~/.ssh/known_hosts
-          ssh -i ~/ssh_key ubuntu@65.0.138.93
+          ssh -i ~/ssh_key ubuntu@65.0.138.93 << 'EOF'
           set -e
           cd week-25-ci-cd
           pnpm install
           pnpm run build
           pm2 restart all
+          EOF
