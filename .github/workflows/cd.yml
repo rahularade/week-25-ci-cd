@@ -16,7 +16,7 @@ jobs:
           echo "${{ secrets.KNOWN_HOST }}" > ~/.ssh/known_hosts
           ssh -i ~/ssh_key ubuntu@65.0.138.93 << 'EOF'
           set -e
-          source ~/.bashrc
+          export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v24.11.0/bin"
           cd week-25-ci-cd
           git pull origin main
           pnpm install
