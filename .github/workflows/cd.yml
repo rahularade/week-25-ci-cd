@@ -13,7 +13,7 @@ jobs:
           echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
           mkdir /home/runner/.ssh
           echo "${{secrets.KNOWN_HOST}}" &> /home/runner/.ssh/known_hosts
-          chmod 700 ~/ssh_key
+          chmod 700 /home/runner/ssh_key
           ssh -i ~/ssh_key ubuntu@65.0.138.93
           cd week-25-ci-cd
           pnpm install
