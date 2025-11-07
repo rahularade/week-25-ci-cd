@@ -15,6 +15,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOST }}" > ~/.ssh/known_hosts
           ssh -i ~/ssh_key ubuntu@65.0.138.93
+          set -e
           cd week-25-ci-cd
           pnpm install
           pnpm run build
