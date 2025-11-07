@@ -16,6 +16,7 @@ jobs:
           echo "${{ secrets.KNOWN_HOST }}" > ~/.ssh/known_hosts
           ssh -i ~/ssh_key ubuntu@65.0.138.93 << 'EOF'
           set -e
+          source ~/.bashrc
           cd week-25-ci-cd
           git pull origin main
           pnpm install
