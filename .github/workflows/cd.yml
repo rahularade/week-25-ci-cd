@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: SSH into server
         run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
+          echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
+          echo "${{secrets.KNOWN_HOST}}" &> ~/.ssh/known_hosts
           ssh -i ~/ssh_key ubuntu@65.0.138.93
           cd week-25-ci-cd
           pnpm install
