@@ -17,6 +17,7 @@ jobs:
           ssh -i ~/ssh_key ubuntu@65.0.138.93 << 'EOF'
           set -e
           cd week-25-ci-cd
+          git pull origin main
           pnpm install
           pnpm run build
           pm2 restart all
