@@ -11,7 +11,7 @@ jobs:
       - name: SSH into server
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
-          ssh -i ~/ssh_key ubuntu@13.200.235.144
+          ssh -i ~/ssh_key ubuntu@65.0.138.93
           cd week-25-ci-cd
           pnpm install
           pnpm run build
