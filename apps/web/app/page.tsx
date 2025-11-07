@@ -6,11 +6,11 @@ export default async function Home() {
     return (
         <div style={{ textAlign: "center" }}>
             <div style={{ color: "yellow" }}>
-                Username:
+                Production Username:
                 {user?.username}
             </div>
             <div style={{ color: "yellow" }}>
-                Password:
+                Production Password:
                 {user?.password}
             </div>
         </div>
