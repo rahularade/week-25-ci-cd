@@ -1,0 +1,23 @@
+name: Deploy to staging
+on:
+  push:
+    branches: [production]
+
+jobs:
+  deploy_everything:
+    runs-on: ubuntu-latest
+    name: Deplying everything to staging
+    steps:
+      - name: SSH into server
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.233.163.121 << 'EOF'
+          set -e
+          export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v24.11.0/bin"
+          cd week-25-ci-cd
+          git pull origin production
+          pnpm install
+          pnpm run build
+          pm2 restart all
+          EOF
