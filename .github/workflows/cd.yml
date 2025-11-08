@@ -1,25 +1,22 @@
-name: Deploy to staging
+name: Build on PR
+
 on:
-  push:
-    branches: [main]
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy_everything:
+  build:
     runs-on: ubuntu-latest
-    name: Deplying everything to staging
     steps:
-      - name: SSH into server
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
-          chmod 600 ~/ssh_key
-          mkdir -p ~/.ssh
-          echo "${{ secrets.KNOWN_HOST }}" > ~/.ssh/known_hosts
-          ssh -i ~/ssh_key ubuntu@65.0.138.93 << 'EOF'
-          set -e
-          export PATH="$PATH:/home/ubuntu/.nvm/versions/node/v24.11.0/bin"
-          cd week-25-ci-cd
-          git pull origin main
-          pnpm install
-          pnpm run build
-          pm2 restart all
-          EOF
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Run Build
+        run: npm run build
